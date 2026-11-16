@@ -66,12 +66,22 @@ header nav a:hover{text-decoration:underline}
 .two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5);align-items:start}
 @media(max-width:860px){.two{grid-template-columns:1fr;gap:var(--s4)}.sec{padding:var(--s5) 0}}
 
-/* oferta */
-.menu{list-style:none;border-top:2px solid var(--ink)}
-.menu li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--s2);align-items:baseline;padding:var(--s2) 0;border-bottom:1px solid var(--line)}
-.menu h3{font-size:clamp(22px,2.6vw,30px)}
-.menu p{color:var(--ink-2);font-size:16px}
-@media(max-width:560px){.menu li{grid-template-columns:1fr;gap:4px}}
+/* oferta: karty ze zdjęciami (miejsca na zdjęcia, dopóki właściciele nie wyślą swoich) */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s3);margin-bottom:var(--s4)}
+.arrows{display:flex;gap:var(--s1)}
+.arrows button{width:48px;height:48px;border:1px solid var(--ink);border-radius:var(--r);background:transparent;font:400 26px var(--hd);color:var(--ink);cursor:pointer;line-height:1}
+.arrows button:hover{background:var(--ink);color:var(--paper)}
+.cards{display:flex;gap:var(--s3);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:var(--s2);scrollbar-width:thin;scrollbar-color:var(--ink-2) transparent}
+.card{flex:0 0 min(264px,76vw);scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/5;background:var(--paper-2);position:relative;border-bottom:1px solid var(--line)}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .ph .slot{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:var(--s2);color:var(--ink-2);font-size:13px}
+.card .ph .slot b{font:600 22px var(--hd);color:var(--ink)}
+.card .bd{padding:var(--s2);display:flex;flex-direction:column;gap:var(--s1);flex:1}
+.card h3{font-size:22px}
+.card p{font-size:15px;color:var(--ink-2);flex:1}
+.card .add{margin-top:var(--s1);min-height:44px;border:1px solid var(--accent);border-radius:var(--r);background:transparent;color:var(--accent);font:600 15px var(--hd);cursor:pointer}
+.card .add:hover,.card .add.on{background:var(--accent);color:#fff}
 blockquote{margin-top:var(--s4);padding-left:var(--s2);border-left:3px solid var(--accent);max-width:46ch}
 blockquote p{font-size:19px;font-style:italic}
 blockquote cite{display:block;margin-top:var(--s1);font:500 14px var(--hd);font-style:normal;color:var(--ink-2)}
@@ -136,24 +146,19 @@ footer p{max-width:78ch}
 </section>
 
 <section class="sec alt" id="oferta">
-  <div class="wrap two">
-    <div>
-      <h2>Oferta</h2>
-      <p class="small" style="margin-top:var(--s2);max-width:34ch">Pozycje i ceny zmieniają się z sezonem. Aktualną listę podaje kawiarnia.</p>
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h2>Oferta</h2>
+        <p class="small" style="margin-top:var(--s2);max-width:46ch">Pozycje i ceny zmieniają się z sezonem. Aktualną listę podaje kawiarnia. Dodaj pozycje do zamówienia przyciskiem na karcie.</p>
+      </div>
+      <div class="arrows"><button type="button" id="prev" aria-label="Poprzednie pozycje">‹</button><button type="button" id="next" aria-label="Następne pozycje">›</button></div>
     </div>
-    <div>
-      <ul class="menu">
-        <li><h3>Kawa speciality</h3><p>Kawiarnia speciality, tak opisuje się sama na Facebooku.</p></li>
-        <li><h3>Domowe ciasta</h3><p>Także wegańskie i bezglutenowe.</p></li>
-        <li><h3>Chleb</h3><p>Na miejscu lub na wynos.</p></li>
-        <li><h3>Kisze</h3><p>Wytrawne, do zjedzenia od razu.</p></li>
-        <li><h3>Śniadania</h3><p>Podawane do kawy.</p></li>
-      </ul>
-      <blockquote>
-        <p>„Czarne porzeczki to nasz ukochany letni owoc, naszym zdaniem całkowicie niedoceniony polski super food.”</p>
-        <cite>Retro na Facebooku, 19 lipca</cite>
-      </blockquote>
-    </div>
+    <div class="cards" id="cards" tabindex="0" aria-label="Karty oferty"></div>
+    <blockquote>
+      <p>„Czarne porzeczki to nasz ukochany letni owoc, naszym zdaniem całkowicie niedoceniony polski super food.”</p>
+      <cite>Retro na Facebooku, 19 lipca</cite>
+    </blockquote>
   </div>
 </section>
 
@@ -254,13 +259,24 @@ items.forEach(function(it,i){var li=document.createElement('li');li.innerHTML='<
  var bs=li.querySelectorAll('button'),o=li.querySelector('output');
  bs[0].onclick=function(){q[i]=Math.max(0,q[i]-1);o.textContent=q[i];calc()};
  bs[1].onclick=function(){q[i]=Math.min(9,q[i]+1);o.textContent=q[i];calc()};ul.appendChild(li)});
+/* karty z przyciskiem Dodaj, zdjęcia z folderu photos/ (po zgodzie właścicieli) */
+var slugs=['kawa','ciasto-domowe','ciasto-weganskie','ciasto-bezglutenowe','chleb','kisza','sniadanie'],cardDesc=['Kawa speciality, parzona na zamówienie.','Domowe ciasto z dzisiejszej witryny.','Ciasto bez składników odzwierzęcych.','Ciasto bez glutenu.','Pieczywo na miejscu lub na wynos.','Wytrawna tarta do zjedzenia od razu.','Lekkie śniadanie do kawy.'],cardsEl=$('cards'),addBtns=[];
+items.forEach(function(it,i){var c=document.createElement('article');c.className='card';
+ c.innerHTML='<div class="ph"><div class="slot"><b>'+it[0]+'</b><span>Tu pojawi się zdjęcie z Waszej kawiarni</span></div><img alt="'+it[0]+', Retro Gdańsk" src="photos/'+slugs[i]+'.jpg" loading="lazy"></div><div class="bd"><h3>'+it[0]+'</h3><p>'+cardDesc[i]+'</p><button type="button" class="add">Dodaj do zamówienia</button></div>';
+ c.querySelector('img').onerror=function(){this.remove()};
+ var b=c.querySelector('.add');addBtns.push(b);
+ b.onclick=function(){q[i]=Math.min(9,q[i]+1);ul.children[i].querySelector('output').textContent=q[i];calc()};
+ cardsEl.appendChild(c)});
+$('prev').onclick=function(){cardsEl.scrollBy({left:-284,behavior:'smooth'})};
+$('next').onclick=function(){cardsEl.scrollBy({left:284,behavior:'smooth'})};
+function syncCards(){addBtns.forEach(function(b,i){b.classList.toggle('on',q[i]>0);b.textContent=q[i]>0?'W zamówieniu: '+q[i]+' (dodaj jeszcze)':'Dodaj do zamówienia'})}
 var times=['jak najszybciej','za 15 minut','za 30 minut','za godzinę'],seg=$('seg');
 times.forEach(function(t,i){var id='t'+i;seg.insertAdjacentHTML('beforeend','<input type="radio" name="tm" id="'+id+'" value="'+t+'"'+(i===0?' checked':'')+'><label for="'+id+'">'+t+'</label>')});
 function when(){var c=document.querySelector('input[name=tm]:checked');return c?c.value:times[0]}
 function txt(){var L=['Dzień dobry,','','proszę o przygotowanie na odbiór:'],n=0;
  items.forEach(function(it,i){if(q[i]){L.push('• '+it[0]+' × '+q[i]);n+=q[i]}});
  L.push('','Odbiór: '+when());var nt=$('nt').value.trim();if(nt)L.push('Uwagi: '+nt);var nm=$('nm').value.trim();L.push('','Pozdrawiam'+(nm?', '+nm:''));return {n:n,s:L.join('\n')}}
-function calc(){var r=txt(),pre=$('pre');
+function calc(){var r=txt(),pre=$('pre');syncCards();
  pre.textContent=r.n?r.s:'Wybierz co najmniej jedną pozycję, a tu pojawi się gotowa wiadomość.';pre.classList.toggle('hint',!r.n);
  $('mail').href='mailto:retro.gdansk@gmail.com?subject='+encodeURIComponent('Zamówienie na odbiór')+'&body='+encodeURIComponent(r.s)}
 ['nm','nt'].forEach(function(i){$(i).addEventListener('input',calc)});seg.addEventListener('change',calc);
