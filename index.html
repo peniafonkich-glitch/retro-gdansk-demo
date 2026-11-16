@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Retro | kawiarnia speciality w Gdańsku, makieta strony</title>
+<meta name="description" content="Makieta strony kawiarni Retro z Gdańska, ul. Piwna 5/6: kawa speciality, domowe ciasta, chleb, kisze i śniadania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Shrikhand&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --tom:#d8412a;
+  --must:#eaae2b;
+  --teal:#176b66;
+  --cream:#f7ebd3;
+  --ink:#2a1a12;
+  --gut:clamp(20px,5vw,64px);
+  --bg:var(--tom);
+  --hd:'Shrikhand','Georgia',serif;
+  --bd:'DM Sans','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--cream)}
+body{font-family:var(--bd);font-size:17px;line-height:1.6;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--hd);font-weight:400;line-height:1.02}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+
+header{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px var(--gut);transition:background .4s,box-shadow .4s}
+header.solid{background:rgba(247,235,211,.94);backdrop-filter:blur(8px);box-shadow:0 2px 14px rgba(42,26,18,.12)}
+.brand{font-family:var(--hd);font-size:34px;text-decoration:none;color:var(--cream);transition:color .4s;line-height:1}
+header.solid .brand{color:var(--tom)}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;font-weight:700;font-size:15px;color:var(--cream);transition:color .3s}
+header.solid nav a{color:var(--ink)}
+nav a:hover{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+@media(max-width:700px){nav a:not(.keep){display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--ink);color:var(--cream);font-weight:700;font-size:16px;text-decoration:none;border:2.5px solid var(--ink);cursor:pointer;font-family:var(--bd);transition:transform .2s,background .2s,color .2s}
+.btn:hover{background:var(--must);color:var(--ink)}.btn:active{transform:scale(.97)}
+.btn.out{background:transparent;color:inherit;border-color:currentColor}
+.btn.out:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+
+/* scena */
+.track{position:relative;height:420vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg);transition:background .7s ease;color:var(--cream)}
+.disc{position:absolute;right:max(-8vw,-80px);top:50%;width:min(78vh,66vw);aspect-ratio:1;border-radius:50%;transform:translateY(-50%);background:var(--cream);opacity:.14;transition:background .7s}
+.ring{position:absolute;right:max(-2vw,-20px);top:50%;width:min(60vh,52vw);aspect-ratio:1;border-radius:50%;transform:translateY(-50%);border:3px dashed rgba(247,235,211,.55)}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.chap{position:absolute;left:var(--gut);bottom:clamp(64px,13vh,140px);max-width:min(600px,88vw);opacity:0;transform:translateY(26px);transition:opacity .55s,transform .8s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.chap.on{opacity:1;transform:none;pointer-events:auto}
+.chap h1,.chap h2{font-size:clamp(56px,11vw,150px);letter-spacing:.005em;text-shadow:0 4px 0 rgba(42,26,18,.2)}
+.chap p{margin-top:16px;max-width:34ch;font-size:clamp(17px,1.9vw,21px);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.stage .btn{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.stage .btn:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.stage .btn.out{background:transparent;color:var(--cream);border-color:var(--cream)}
+.stage .btn.out:hover{background:var(--cream);color:var(--ink)}
+.dots{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:3}
+.dots i{width:12px;height:12px;border-radius:50%;border:2px solid var(--cream);transition:background .3s}
+.dots i.on{background:var(--cream)}
+.load{position:absolute;right:var(--gut);bottom:30px;font-size:13px;font-weight:700;opacity:.8;transition:opacity .5s}
+@media(max-width:700px){.dots{display:none}.chap{bottom:46px}#cv{height:68%}.disc,.ring{top:34%}}
+
+/* sekcje */
+.sec{padding:clamp(70px,11vw,140px) 0;position:relative}
+.sec h2{font-size:clamp(42px,7vw,92px);color:var(--tom)}
+.sub{margin-top:14px;max-width:46ch;font-weight:500}
+.rows{margin-top:44px;border-top:3px solid var(--ink)}
+.row{display:grid;grid-template-columns:minmax(200px,1.2fr) 2fr;gap:8px 32px;align-items:baseline;padding:22px 0;border-bottom:3px solid var(--ink);transition:background .25s,padding-left .3s,color .25s}
+.row:hover{background:var(--must);padding-left:16px}
+.row h3{font-size:clamp(28px,3.6vw,46px)}
+.row p{font-weight:500;max-width:52ch}
+@media(max-width:700px){.row{grid-template-columns:1fr}}
+.prove{background:var(--teal);color:var(--cream)}
+.prove .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;margin-top:10px}
+.prove .n{font-family:var(--hd);font-size:clamp(68px,10vw,128px);line-height:1;color:var(--must)}
+.prove .n small{font-size:.38em;color:var(--cream)}
+.prove p{font-weight:500;max-width:28ch}
+.prove h2{color:var(--cream)}
+.src{font-size:13px;opacity:.8;margin-top:30px}
+
+.ord{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,5vw,72px);margin-top:32px;align-items:start}
+.pick{list-style:none;border-top:3px solid var(--ink)}
+.pick li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:14px 0;border-bottom:1.5px solid rgba(42,26,18,.4)}
+.pick b{display:block;font-size:18px}.pick small{font-size:14px;opacity:.75}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:46px;height:46px;border-radius:50%;border:2.5px solid var(--ink);background:transparent;font-size:24px;font-weight:700;cursor:pointer;line-height:1;color:var(--ink)}
+.qty button:hover{background:var(--must)}.qty button:active{transform:scale(.94)}
+.qty output{min-width:28px;text-align:center;font-family:var(--hd);font-size:28px}
+.card{background:var(--tom);color:var(--cream);border-radius:28px;padding:clamp(20px,3vw,34px)}
+.card label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}
+.card input,.card select,.card textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;min-height:48px;border:2.5px solid var(--ink);border-radius:14px;background:var(--cream);color:var(--ink)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.card .empty{font-weight:700;margin-bottom:12px}
+.acts{display:flex;flex-wrap:wrap;gap:10px}.acts .btn{flex:1 1 150px}
+.card .btn{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.card .btn:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.card .btn.out{background:transparent;color:var(--cream);border-color:var(--cream)}
+.card .btn.out:hover{background:var(--cream);color:var(--ink)}
+.msg{min-height:22px;font-size:14px;font-weight:700;margin-top:10px}
+@media(max-width:860px){.ord{grid-template-columns:1fr}}
+
+.contact{background:var(--must)}
+.cgrid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,5vw,64px);align-items:stretch}
+.contact h2{color:var(--ink)}
+.cinfo p{margin-top:12px;font-size:18px;font-weight:500}
+.cinfo a{font-weight:700;text-underline-offset:4px}
+.map{border-radius:24px;overflow:hidden;min-height:340px;border:3px solid var(--ink);background:#e8dcc0}
+.map iframe{width:100%;height:100%;min-height:340px;border:0}
+.note{font-size:13.5px;max-width:72ch;margin-top:40px;padding-top:18px;border-top:2px solid var(--ink)}
+@media(max-width:820px){.cgrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <a class="brand" href="#start">Retro</a>
+  <nav aria-label="Menu"><a href="#oferta">Oferta</a><a href="#opinie">Opinie</a><a href="#zamow" class="keep">Zamów</a><a href="#kontakt" class="keep">Kontakt</a></nav>
+</header>
+
+<main>
+<section class="track" id="start">
+  <div class="stage" id="stage">
+    <div class="disc"></div><div class="ring"></div>
+    <canvas id="cv" aria-hidden="true"></canvas>
+    <div class="load" id="load">Ładuję model 3D…</div>
+    <div class="chap on" data-i="0">
+      <h1>Retro</h1>
+      <p>Kawiarnia speciality w sercu Gdańska, przy ulicy Piwnej.</p>
+      <div class="cta"><a class="btn" href="#zamow">Zamów na odbiór</a><a class="btn out" href="#oferta">Zobacz ofertę</a></div>
+    </div>
+    <div class="chap" data-i="1">
+      <h2>Domowe ciasta</h2>
+      <p>Także wegańskie i bezglutenowe. Każdy znajdzie coś dla siebie.</p>
+    </div>
+    <div class="chap" data-i="2">
+      <h2>Chleb, kisze i śniadania</h2>
+      <p>Na słono i na wczesne popołudnie, do kawy lub zamiast obiadu.</p>
+      <div class="cta"><a class="btn" href="#zamow">Wybierz co chcesz</a></div>
+    </div>
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+  </div>
+</section>
+
+<section class="sec" id="oferta">
+  <div class="wrap">
+    <h2>Co jest w witrynie</h2>
+    <p class="sub">Tak opisują to sami goście i gospodarze. Konkretne pozycje i ceny dopiszemy wspólnie.</p>
+    <div class="rows">
+      <div class="row"><h3>Kawa speciality</h3><p>Starannie wybrane ziarna i parzenie, które pokazuje ich smak.</p></div>
+      <div class="row"><h3>Domowe ciasta</h3><p>Pieczone na miejscu, zmieniają się z sezonem. Latem na przykład czarne porzeczki.</p></div>
+      <div class="row"><h3>Wegańskie i bezglutenowe</h3><p>Osobne ciasta dla tych, którzy nie jedzą nabiału albo glutenu.</p></div>
+      <div class="row"><h3>Chleb i kisze</h3><p>Pieczywo i wytrawne tarty do zjedzenia na miejscu lub na wynos.</p></div>
+      <div class="row"><h3>Śniadania</h3><p>Lekkie, domowe, podawane do kawy.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec prove" id="opinie">
+  <div class="wrap">
+    <h2>Gdańsk ich zna</h2>
+    <div class="nums">
+      <div><div class="n">94<small>%</small></div><p>gości poleca Retro, na podstawie 843 opinii</p></div>
+      <div><div class="n">9,1<small> tys.</small></div><p>obserwujących na Facebooku</p></div>
+    </div>
+    <p class="src">Dane z facebookowej strony Retro Gdańsk.</p>
+  </div>
+</section>
+
+<section class="sec" id="zamow">
+  <div class="wrap">
+    <h2>Zamów na odbiór</h2>
+    <p class="sub">Wybierz, co chcesz, podaj godzinę. Powstanie gotowa wiadomość do kawiarni, którą wyślesz mailem, zadzwonisz albo skopiujesz.</p>
+    <div class="ord">
+      <ul class="pick" id="pick"></ul>
+      <div class="card">
+        <div class="fr">
+          <div><label for="nm">Imię</label><input id="nm" autocomplete="given-name" placeholder="np. Kasia"></div>
+          <div><label for="tm">Odbiór</label><select id="tm"></select></div>
+        </div>
+        <div style="margin-bottom:14px"><label for="nt">Uwaga (nieobowiązkowo)</label><input id="nt" placeholder="np. kawa bez cukru, ciasto bez glutenu"></div>
+        <div class="empty" id="empty">Wybierz przynajmniej jedną pozycję.</div>
+        <div class="acts">
+          <a class="btn" id="mail" href="#">Wyślij e-mailem</a>
+          <a class="btn out" href="tel:+48665217965">Zadzwoń</a>
+          <button type="button" class="btn out" id="copy">Kopiuj zamówienie</button>
+        </div>
+        <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="kontakt">
+  <div class="wrap">
+    <div class="cgrid">
+      <div class="cinfo">
+        <h2>Zajrzyj do nas</h2>
+        <p style="margin-top:22px"><b>Retro</b><br>ul. Piwna 5/6<br>80-831 Gdańsk</p>
+        <p>Telefon: <a href="tel:+48665217965">665 217 965</a></p>
+        <p>E-mail: <a href="mailto:retro.gdansk@gmail.com">retro.gdansk@gmail.com</a></p>
+        <p><a href="https://www.facebook.com/RetroGdansk/" rel="noopener">Retro na Facebooku</a></p>
+      </div>
+      <div class="map"><iframe title="Mapa: Retro, Piwna 5/6, Gdańsk" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=18.6400%2C54.3452%2C18.6600%2C54.3552&amp;layer=mapnik&amp;marker=54.3502671%2C18.6500841"></iframe></div>
+    </div>
+    <p class="note">To makieta nowej strony przygotowana na próbę, bez zdjęć kawiarni. Czarka z kawą i animacja są wygenerowane komputerowo. W pełnej wersji pojawią się prawdziwe zdjęcia Retro, godziny otwarcia i menu z cenami, za zgodą właścicieli. Teksty i dane pochodzą z facebookowej strony Retro Gdańsk.</p>
+  </div>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var hd=$('hd'),track=document.querySelector('.track'),stage=$('stage'),chaps=document.querySelectorAll('.chap'),dots=document.querySelectorAll('.dots i');
+var BG=['#d8412a','#176b66','#eaae2b'],FG=['#f7ebd3','#f7ebd3','#2a1a12'];
+/* anchors in data: preview */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);var t=id&&$(id);if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-(id==='start'?0:30),behavior:'smooth'})}});
+
+/* 3D */
+var cv=$('cv'),load=$('load'),ok=false,model=null,pivot,R,S,cam;
+try{var t=document.createElement('canvas');ok=!!(window.WebGLRenderingContext&&(t.getContext('webgl')||t.getContext('experimental-webgl')))&&window.THREE&&THREE.GLTFLoader}catch(e){}
+if(ok){
+ R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio||1,2));R.outputEncoding=THREE.sRGBEncoding;
+ S=new THREE.Scene();cam=new THREE.PerspectiveCamera(30,1,.1,100);cam.position.set(0,0,8);
+ S.add(new THREE.AmbientLight(0xffffff,.55));
+ var k=new THREE.DirectionalLight(0xfff0d8,1.5);k.position.set(-3,5,5);S.add(k);
+ var r=new THREE.DirectionalLight(0xffc27a,1.0);r.position.set(4,2,-4);S.add(r);
+ var f=new THREE.DirectionalLight(0xd8ecff,.45);f.position.set(4,-2,4);S.add(f);
+ pivot=new THREE.Group();S.add(pivot);
+ new THREE.GLTFLoader().load('cup.glb',function(g){
+  model=g.scene;var b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());
+  var s=2.9/Math.max(sz.x,sz.y,sz.z);model.scale.setScalar(s);model.position.set(-c.x*s,-c.y*s,-c.z*s);
+  pivot.add(model);load.style.opacity=0;setTimeout(function(){load.style.display='none'},600);draw()
+ },undefined,function(){load.textContent='Nie udało się wczytać modelu 3D.'});
+}else{load.style.display='none'}
+function fit(){if(!ok)return;var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.8?10:8;cam.updateProjectionMatrix();draw()}
+if(ok){if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);else addEventListener('resize',fit)}
+var mx=0;addEventListener('pointermove',function(e){mx=(e.clientX/innerWidth-.5)*2});
+var still=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,vis=true,cur=-1;
+if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(stage);
+function draw(){
+ var rr=track.getBoundingClientRect(),tot=track.offsetHeight-innerHeight,p=Math.min(1,Math.max(0,-rr.top/tot));
+ hd.classList.toggle('solid',scrollY>50);
+ var idx=p<.34?0:p<.68?1:2;
+ if(idx!==cur){cur=idx;chaps.forEach(function(x,i){x.classList.toggle('on',i===idx)});dots.forEach(function(x,i){x.classList.toggle('on',i===idx)});stage.style.setProperty('--bg',BG[idx]);stage.style.color=FG[idx];stage.querySelectorAll('.btn').forEach(function(b){b.style.removeProperty('color')});
+  stage.querySelector('.disc').style.background=FG[idx];stage.querySelector('.ring').style.borderColor=FG[idx];stage.querySelectorAll('.dots i').forEach(function(d){d.style.borderColor=FG[idx];d.style.background=d.classList.contains('on')?FG[idx]:'transparent'});
+  brand()}
+ if(!model)return;
+ var w=cv.clientWidth/cv.clientHeight,mob=w<.8;
+ pivot.rotation.y=(still?0:p*Math.PI*2.6)+mx*.25-.5;
+ pivot.rotation.x=.28+Math.sin(p*Math.PI*2)*.08;
+ var sc=1+.1*Math.sin(p*Math.PI);pivot.scale.setScalar(sc);
+ pivot.position.x=mob?0:(w<1.3?1.15:2.3)-.3*Math.sin(p*Math.PI);pivot.scale.multiplyScalar(w<1.3&&!mob?.78:1);
+ pivot.position.y=mob?1.1:0;
+ R.render(S,cam)}
+function brand(){var b=document.querySelector('.stage .btn.out');}
+function loop(){requestAnimationFrame(loop);if(vis)draw()}
+addEventListener('scroll',function(){hd.classList.toggle('solid',scrollY>50)},{passive:true});
+loop();
+
+/* zamówienie */
+var items=[['Kawa','napisz w uwadze jaką'],['Ciasto domowe','dzisiejsze w witrynie'],['Ciasto wegańskie',''],['Ciasto bezglutenowe',''],['Chleb','na wynos'],['Kisza','wytrawna tarta'],['Śniadanie','']];
+var q=items.map(function(){return 0}),ul=$('pick');
+items.forEach(function(it,i){var li=document.createElement('li');li.innerHTML='<div><b>'+it[0]+'</b>'+(it[1]?'<small>'+it[1]+'</small>':'')+'</div><div class="qty"><button type="button" aria-label="Mniej: '+it[0]+'">−</button><output>0</output><button type="button" aria-label="Więcej: '+it[0]+'">+</button></div>';
+ var bs=li.querySelectorAll('button'),o=li.querySelector('output');
+ bs[0].onclick=function(){q[i]=Math.max(0,q[i]-1);o.textContent=q[i];calc()};
+ bs[1].onclick=function(){q[i]=Math.min(9,q[i]+1);o.textContent=q[i];calc()};ul.appendChild(li)});
+var tm=$('tm');['jak najszybciej','za 15 minut','za 30 minut','za godzinę'].forEach(function(t){var o=document.createElement('option');o.textContent=t;tm.appendChild(o)});
+function txt(){var L=['Dzień dobry,','','proszę o przygotowanie na odbiór:'],n=0;
+ items.forEach(function(it,i){if(q[i]){L.push('• '+it[0]+' × '+q[i]);n+=q[i]}});
+ L.push('','Odbiór: '+tm.value);var nt=$('nt').value.trim();if(nt)L.push('Uwaga: '+nt);var nm=$('nm').value.trim();if(nm)L.push('','Pozdrawiam, '+nm);return {n:n,s:L.join('\n')}}
+function calc(){var r=txt();$('empty').style.display=r.n?'none':'block';
+ $('mail').href='mailto:retro.gdansk@gmail.com?subject='+encodeURIComponent('Zamówienie na odbiór')+'&body='+encodeURIComponent(r.s)}
+['nm','nt'].forEach(function(i){$(i).addEventListener('input',calc)});tm.addEventListener('change',calc);
+$('copy').addEventListener('click',function(){var m=$('msg'),r=txt();if(!r.n){m.textContent='Najpierw wybierz pozycję.';return}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(r.s).then(function(){m.textContent='Skopiowano. Wklej w wiadomość do kawiarni.'},function(){m.textContent='Nie udało się skopiować.'})}else{m.textContent='Nie udało się skopiować.'}});
+$('mail').addEventListener('click',function(e){if(!txt().n){e.preventDefault();$('msg').textContent='Najpierw wybierz pozycję.'}});
+calc();
+})();
+</script>
+</body>
+</html>
